@@ -1,15 +1,42 @@
 import { createGlobalStyle } from "styled-components";
-import { colors, fonts } from "../styles/stylesVariables";
 
 const GlobalStyles = createGlobalStyle`
-  html, body {
-    font-family: ${fonts.Roboto};
-    font-size: 15px;
-    background-color: ${colors.black.background}; 
-    color: ${colors.yellow};
-    padding: 0;
-    margin: 0;
-  }
+*{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+}
+
+html 
+{
+  font-size: 62.5%;
+}
+
+body 
+{
+  font-family: 'Roboto', sans-serif;
+  font-size: 3.5rem;
+
+  background: black;
+  color: #FFD100;
+
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body,
+
+#root{ height: 100%;}
+
+html {
+  scroll-behavior: smooth;
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+}
+}
+
 `;
 
 export default GlobalStyles;
