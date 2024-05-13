@@ -1,20 +1,18 @@
-import { Titulo,Botao,Input,Container } from './Styles.js';
-import React from 'react';
+import { Titulo, Botao, Input, Container, DivInput } from "./Styles.js";
 
 function Cadastro() {
   return (
-      <Container>
-        <Titulo>CADASTRO</Titulo>
-        <Botao onClick={() => alert('Conta criada!')}
-        >
-          CRIAR CONTA
-        </Botao>
-        <Input >E-mail</Input>
-        <Input >Senha</Input>
-        <Input >Nome</Input>
-        <Input >Cargo</Input>
-        <Input >Status</Input>
-      </Container>
+    <Container>
+      <Titulo>CADASTRO</Titulo>
+      <Botao onClick={() => alert("Conta criada!")}>CRIAR CONTA</Botao>
+      <DivInput>
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+        <Input />
+      </DivInput>
+    </Container>
   );
 }
 
