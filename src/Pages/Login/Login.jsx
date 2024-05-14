@@ -1,44 +1,56 @@
 import { Link, useNavigate } from "react-router-dom";
-import BotaoPadrao from "../../Components/BotaoPadrao/BotaoPadrao";
-import { DivFaixa, Frase, DivInput, DivLogin } from "./Styles.js";
-import { Input } from 'antd';
-import {logo} from "./Images/LogoCPE.png"
-import "./style.css"; 
-
+import { DivFaixa, Frase, DivInput, DivLogin , Input, Button, Label, Form, Título } from "./Styles.js"
+import { useState } from "react";
 
 function Login() {
 
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log({email, senha})
+  }
+
+
     return (
 
      <div>
       <DivFaixa>
-        <img src= "{logo}" />
+        Imagem
       </DivFaixa> 
 
       <DivLogin>
-        <Login> LOGIN </Login>
+        <Título> LOGIN </Título>
         <DivInput>
-          
-        <Input
-          className="StyleInput"
-          name='email'
-          placeholder='E-mail'
-          type='email'
-        
-        />
-        <Input
-          className="StyleInput"
-          name='password'
-          placeholder='Senha'
-          type='password'
-        />
+          <Form onSubmit={handleSubmit}>  
+            <Label htmlFor="email"> </Label>
+              <Input
+              type='email'
+              name="email"
+              id="email"
+              placeholder='E-mail'
+              required
+              onChange = {(e)=> setEmail(e.target.value)}
+              />
+            <Label htmlFor="senha"></Label>
+              <Input
+              type='password'
+              name="senha"
+              id="senha"
+              placeholder='Senha'
+              required
+              onChange = {(e)=> setSenha(e.target.value)}
+              />
+  
+            <Frase> Não tem login? Faça seu cadastro <Link to= "/Cadastro" style={{color: "white"}}> aqui</Link> </Frase>
+            <Button type="submit" onClick={() => navigate("/")}  > ENTRAR </Button>
+          </Form>
        
-        <Frase> Não tem login? Faça seu cadastro <Link to= "Cadastro" className="link"> aqui</Link> </Frase>
         </DivInput>
     
-         
-        <BotaoPadrao onClick = {() => navigate("/")}></BotaoPadrao>
+        
+        
         </DivLogin>
       </div>
 
