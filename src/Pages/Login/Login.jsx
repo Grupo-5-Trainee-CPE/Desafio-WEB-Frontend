@@ -56,7 +56,7 @@ function Login() {
                 aqui
               </Link>{" "}
             </Frase>
-            <Button type="submit" onClick={() => navigate("/")}>
+            <Button type="submit" >
               {" "}
               ENTRAR{" "}
             </Button>
