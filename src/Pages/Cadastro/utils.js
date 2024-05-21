@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const validador = z.object({
-  name: z
+  nome: z
     .string({ required_error: "Obrigatório" })
     .min(2, { message: "No mínimo 2 caracteres" })
     .max(50, { message: "No máximo 50 caracteres" }),
@@ -12,11 +12,6 @@ export const validador = z.object({
     .max(50, { message: "No máximo 50 caracteres" }),
 
   senha: z
-    .string({ required_error: "Obrigatório" })
-    .min(2, { message: "No mínimo 2 caracteres" })
-    .max(50, { message: "No máximo 50 caracteres" }),
-
-  status: z
     .string({ required_error: "Obrigatório" })
     .min(2, { message: "No mínimo 2 caracteres" })
     .max(50, { message: "No máximo 50 caracteres" }),

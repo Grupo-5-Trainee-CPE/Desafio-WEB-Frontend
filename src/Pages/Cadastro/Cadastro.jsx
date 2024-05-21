@@ -3,13 +3,15 @@ import { useCreateUsuarios } from "../../Hooks/query/usuarios";
 import { Titulo, Botao, Input, Container, Forms, Frase } from "./Styles";
 import { useForm } from "react-hook-form";
 import { validador } from "./utils";
+import { useNavigate } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 function Cadastro() {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { mutate: createUsuarios } = useCreateUsuarios({
-    onSucess: () => {
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["usuarios"],
       });
@@ -21,6 +23,7 @@ function Cadastro() {
 
   const onSubmit = (data) => {
     createUsuarios(data);
+    navigate("/login");
   };
 
   const {
@@ -35,24 +38,6 @@ function Cadastro() {
 
       <Forms onSubmit={handleSubmit(onSubmit)}>
         <Input
-          id="email"
-          name="email"
-          {...register("email")}
-          placeholder="E-mail"
-          error={!!errors?.email?.message}
-        />
-        {errors?.email?.message && <Frase>{errors?.email?.message}</Frase>}
-
-        <Input
-          id="senha"
-          name="senha"
-          {...register("senha")}
-          placeholder="Senha"
-          error={!!errors?.senha?.message}
-        />
-        {errors?.senha?.message && <Frase>{errors?.senha?.message}</Frase>}
-
-        <Input
           id="nome"
           name="nome"
           {...register("nome")}
@@ -60,7 +45,14 @@ function Cadastro() {
           error={!!errors?.nome?.message}
         />
         {errors?.nome?.message && <Frase>{errors?.nome?.message}</Frase>}
-
+        <Input
+          id="email"
+          name="email"
+          {...register("email")}
+          placeholder="E-mail"
+          error={!!errors?.email?.message}
+        />
+        {errors?.email?.message && <Frase>{errors?.email?.message}</Frase>}
         <Input
           id="cargo"
           name="cargo"
@@ -71,17 +63,15 @@ function Cadastro() {
         {errors?.cargo?.message && <Frase>{errors?.cargo?.message}</Frase>}
 
         <Input
-          id="status"
-          name="status"
-          {...register("status")}
-          placeholder="Status"
-          error={!!errors?.status?.message}
+          id="senha"
+          name="senha"
+          {...register("senha")}
+          placeholder="Senha"
+          error={!!errors?.senha?.message}
         />
-        {errors?.status?.message && <Frase>{errors?.status?.message}</Frase>}
+        {errors?.senha?.message && <Frase>{errors?.senha?.message}</Frase>}
 
-        <Botao type="submit" onClick={() => alert("Conta criada!")}>
-          CRIAR CONTA
-        </Botao>
+        <Botao type="submit">CRIAR CONTA</Botao>
       </Forms>
     </Container>
   );
