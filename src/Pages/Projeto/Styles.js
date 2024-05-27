@@ -167,10 +167,11 @@ export const Linha = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: 20%) {
+  @media (max-width: 500px) {
     flex-direction: column;
     max-width: 300px;
     align-items: flex-start;
+    font-size: 25px;
   }
 `;
 
