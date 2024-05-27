@@ -27,12 +27,12 @@ export const Titulo = styled.div`
   //align-items: center; // Centraliza verticalmente
   color: yellow;
 
-  @media (max-width: 405px) {
+  /* @media (max-width: 405px) {
     flex-direction: column;
     justify-content: center;
     font-size: 30px;
-    // margin-left: 20%;
-  }
+    // margin-left: 50px;
+  } */
 `;
 
 export const Caixa = styled.div`
@@ -134,7 +134,7 @@ export const SubTitulo = styled.div`
     flex-direction: column;
     justify-content: center;
     font-size: 30px;
-    // margin-left: 20%;
+    //margin-left: 20%;
   }
 `;
 
@@ -161,20 +161,27 @@ export const Sbutton = styled.button`
 export const Linha = styled.div`
   color: white;
   display: flex;
-  width: 20%;
+  width: 40%;
   margin-top: 30px;
-  margin-left: 40.6%;
   justify-content: space-between;
   align-items: center;
+  max-width: 600px;
 
-  @media (max-width: 500px) {
-    flex-direction: column;
-    max-width: 300px;
-    align-items: flex-start;
+  @media (max-width: 600px) {
+    //flex-direction: column;
+    // max-width: 300px;
+    //align-items: flex-start;
     font-size: 25px;
+    width: 60%;
   }
 `;
 
 export const ProjetoButtons = styled.div`
   cursor: pointer;
+`;
+
+export const Table = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `;

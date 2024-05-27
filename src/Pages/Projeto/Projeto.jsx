@@ -9,6 +9,7 @@ import {
   Descriçao,
   ProjetoButtons,
   Linha,
+  Table,
 } from "./Styles";
 import { FaTrash, FaEdit } from "react-icons/fa";
 
@@ -44,16 +45,17 @@ function Projeto() {
       </Sbutton>
 
       <SubTitulo>GERENCIAR PROJETOS</SubTitulo>
-
-      {projetos.map((projeto, index) => (
-        <Linha key={index}>
-          <span> {projeto.name} </span>
-          <ProjetoButtons>
-            <FaEdit />
-            <FaTrash />
-          </ProjetoButtons>
-        </Linha>
-      ))}
+      <Table>
+        {projetos.map((projeto, index) => (
+          <Linha key={index}>
+            <span> {projeto.name} </span>
+            <ProjetoButtons>
+              <FaEdit />
+              <FaTrash />
+            </ProjetoButtons>
+          </Linha>
+        ))}
+      </Table>
     </div>
   );
 }
