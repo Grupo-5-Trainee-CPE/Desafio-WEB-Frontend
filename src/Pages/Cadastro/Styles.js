@@ -15,7 +15,7 @@ export const Titulo = styled.h1`
   font-weight: normal;
   color: yellow;
   margin: 0 auto;
-  
+
   @media (max-width: 1200px) {
     height: 40px;
     flex-direction: center;
@@ -31,22 +31,24 @@ export const Titulo = styled.h1`
     flex-direction: column;
     font-size: 30px;
     text-align: center;
-    }
+  }
 `;
 
 export const Botao = styled.button`
   display: flex;
   background-color: yellow;
   justify-content: center;
-  align-items: center; 
+  align-items: center;
   width: 150px;
   height: 50px;
   border-radius: 40px;
   font-size: 17px;
   font-weight: bold;
+  margin-top: 30px;
   position: absolute;
   bottom: 20px;
   left: 50%;
+  top: 350px;
   transform: translate(-50%, -50%);
 
   @media (max-width: 1200px) {
@@ -54,17 +56,18 @@ export const Botao = styled.button`
     height: 50px;
     flex-direction: center;
     bottom: 10%;
-    }
+  }
 
-    @media (max-width: 350px) {
+  @media (max-width: 350px) {
     justify-content: center;
     height: 50px;
     width: 48%;
     font-size: 50%;
-    flex-direction: center;}
+    flex-direction: center;
+  }
 `;
 
-export const DivInput = styled.div`
+/*export const DivInput = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -78,7 +81,8 @@ export const DivInput = styled.div`
     position: absolute;
     top: 50%;
   }
-  `;
+`; */
+
 export const Input = styled.input`
   width: 300px;
   height: 40px;
@@ -94,12 +98,40 @@ export const Input = styled.input`
     justify-content: center;
     height: 35px;
     flex-direction: center;
-    margin: 10px;}
+    margin: 10px;
+  }
 
-    @media (max-width: 350px) {
+  @media (max-width: 350px) {
     justify-content: center;
     height: 35px;
     width: 170%;
     flex-direction: center;
-    margin: 10px;}
+    margin: 10px;
+  }
+`;
+
+export const Forms = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 300px;
+
+  @media (max-width: 1200px) {
+    position: absolute;
+    top: 50%;
+  }
+`;
+
+export const Frase = styled.p`
+  color: red;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 19.92px;
+  text-align: left;
+  align-items: center;
 `;
