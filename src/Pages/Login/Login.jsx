@@ -1,24 +1,28 @@
 import { Link, useNavigate } from "react-router-dom";
-import {
-  DivFaixa,
-  Frase,
-  DivInput,
-  DivLogin,
-  Input,
-  Button,
-  Label,
-  Form,
-  Título,
-} from "./Styles.js";
-import { useState } from "react";
+import { DivFaixa, Frase, DivInput, DivLogin, Input, Button, Label, Form, Título } from "./Styles.js";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginUser } from './utils';
 
 function Login() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log({ email, senha });
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(loginUser),
+  });
+
+  const onSubmit = async (data) => {
+    try {
+      const result = await loginUser(data);
+      console.log(result);
+      navigate("/Home");
+    } catch (error) {
+      console.error('Erro ao fazer login:', error);
+    }
   };
 
   return (
@@ -28,38 +32,34 @@ function Login() {
       <DivLogin>
         <Título> LOGIN </Título>
         <DivInput>
-          <Form onSubmit={handleSubmit}>
-            <Label htmlFor="email"> </Label>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Label htmlFor="email">Email</Label>
             <Input
               type="email"
               name="email"
               id="email"
               placeholder="E-mail"
-              required
-              onChange={(e) => setEmail(e.target.value)}
+              {...register("email")}
             />
-            <Label htmlFor="senha"></Label>
+            {errors.email && <p>{errors.email.message}</p>}
+
+            <Label htmlFor="senha">Senha</Label>
             <Input
               type="password"
               name="senha"
               id="senha"
               placeholder="Senha"
-              required
-              onChange={(e) => setSenha(e.target.value)}
+              {...register("senha")}
             />
+            {errors.senha && <p>{errors.senha.message}</p>}
 
             <Frase>
-              {" "}
               Não tem login? Faça seu cadastro{" "}
               <Link to="/Cadastro" style={{ color: "white" }}>
-                {" "}
                 aqui
-              </Link>{" "}
+              </Link>
             </Frase>
-            <Button type="submit" >
-              {" "}
-              ENTRAR{" "}
-            </Button>
+            <Button type="submit">ENTRAR</Button>
           </Form>
         </DivInput>
       </DivLogin>
