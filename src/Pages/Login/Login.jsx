@@ -13,9 +13,9 @@ function Login() {
   const { mutate: checkLogin } = usecheckLogin({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["usuarios"],
+        queryKey: ["login"],
       });
-      navigate("/Home");
+      navigate('/')
     },
     onError: (err) => {
       console.error('Erro ao fazer login:', err);
@@ -31,7 +31,6 @@ function Login() {
   });
 
   const onSubmit = async (data) => {
-    console.log("Tentativa de login com os dados:", data);
     checkLogin(data);
   };
 

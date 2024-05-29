@@ -6,6 +6,7 @@ export async function createUsuarios(newUser) {
 }
 
 export async function checkLogin(login) {
+  console.log(login);
   const { data } = await api.post(`/login`, login);
   return data;
 }
