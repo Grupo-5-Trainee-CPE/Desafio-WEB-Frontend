@@ -3,9 +3,24 @@ import { DivFaixa, Frase, DivInput, DivLogin, Input, Button, Label, Form, Títul
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginUser } from './utils';
+import { useQueryClient } from "@tanstack/react-query";
+import { usecheckLogin } from "../../Hooks/query/login";
 
 function Login() {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
+
+  const { mutate: checkLogin } = usecheckLogin({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["usuarios"],
+      });
+      navigate("/Home");
+    },
+    onError: (err) => {
+      console.error('Erro ao fazer login:', err);
+    },
+  });
 
   const {
     handleSubmit,
@@ -16,13 +31,8 @@ function Login() {
   });
 
   const onSubmit = async (data) => {
-    try {
-      const result = await loginUser(data);
-      console.log(result);
-      navigate("/Home");
-    } catch (error) {
-      console.error('Erro ao fazer login:', error);
-    }
+    console.log("Tentativa de login com os dados:", data);
+    checkLogin(data);
   };
 
   return (
