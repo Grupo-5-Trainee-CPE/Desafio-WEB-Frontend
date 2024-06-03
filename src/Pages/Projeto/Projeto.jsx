@@ -5,20 +5,19 @@ import {
   Sbutton,
   Input,
   InputMaior,
-  Container,
+  Forms,
   Descriçao,
   ProjetoButtons,
   Linha,
   Table,
-  // Form,
-  // Campo,
-  // Label,
-  // Escrita,
-  //Botão,
-  // Caixão,
 } from "./Styles";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import { useState } from "react";
+
+import { Form, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { validador } from "../Cadastro/utils";
+import { useCreateProjeto } from "../../Hooks/query/projetos";
+import { useQueryClient } from "@tanstack/react-query";
 
 function Projeto() {
   const projetos = [
@@ -27,34 +26,65 @@ function Projeto() {
     { name: "Henrique" },
   ];
 
-  const [nome, setNome] = useState("");
-  const [descrição, setDescrição] = useState("");
-  const [equipe, setEquipe] = useState("");
+  const queryClient = useQueryClient();
+  const { mutate: createProjeto } = useCreateProjeto({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["projetos"],
+      });
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+    createProjeto(data);
+  };
+
+  const {
+    handleSubmit,
+    register,
+    formState: { errors = {} },
+  } = useForm({ resolver: zodResolver(validador) });
 
   return (
     <div>
       <Titulo>CRIAR PROJETOS</Titulo>
 
       <Caixa>
-        <Container>
+        <Forms onSubmit={handleSubmit(onSubmit)}>
           <label htmlFor="nome">Nome:</label>
-          <Input type="text" name="nome" id="nome" required />
-        </Container>
+          <Input
+            type="text"
+            name="nome"
+            id="nome"
+            placeholder="Nome"
+            {...register("nome")}
+          />
+          {errors.name && <p>{errors.name.message}</p>}
 
-        <Descriçao>
-          <label htmlFor="descrição">Descrição:</label>
-          <InputMaior type="text" name="descrição" id="descrição" required />
-        </Descriçao>
+          <Descriçao>
+            <label htmlFor="descrição">Descrição:</label>
+            <InputMaior
+              type="text"
+              name="descricao"
+              id="descricao"
+              placeholder="Descrição"
+              {...register("descricao")}
+            />
+            {errors.descricao && <p>{errors.descricao.message}</p>}
+          </Descriçao>
 
-        <Container>
-          <label htmlFor="equipe">Equipe:</label>
-          <Input type="text" name="equipe" id="equipe" required />
-        </Container>
+          <Sbutton
+            type="submit"
+            onClick={() => alert("Seu projeto foi salvo com sucesso!")}
+          >
+            SALVAR
+          </Sbutton>
+        </Forms>
       </Caixa>
-      <Sbutton onClick={() => alert("Seu projeto foi salvo com sucesso!")}>
-        SALVAR
-      </Sbutton>
-
       <SubTitulo>GERENCIAR PROJETOS</SubTitulo>
       <Table>
         {projetos.map((projeto, index) => (

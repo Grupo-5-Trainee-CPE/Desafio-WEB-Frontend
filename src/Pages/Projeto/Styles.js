@@ -55,7 +55,7 @@ export const Caixa = styled.div`
   }
 `;
 
-export const Container = styled.div`
+export const Forms = styled.form`
   display: flex;
   justify-content: space-between;
   align-items: center;
