@@ -23,6 +23,7 @@ export async function createProjeto(newProject) {
 
 export async function readProjeto() {
   const { data } = await api.get(`/projetos`);
+  console.log(data);
   return data;
 }
 

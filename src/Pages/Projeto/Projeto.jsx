@@ -15,8 +15,8 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 
 import { Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { validador } from "../Cadastro/utils";
-import { useCreateProjeto } from "../../Hooks/query/projetos";
+import { validador } from "./utils";
+import { useCreateProjeto, useGetProjeto } from "../../Hooks/query/projetos";
 import { useQueryClient } from "@tanstack/react-query";
 
 function Projeto() {
@@ -25,6 +25,13 @@ function Projeto() {
     { name: "Stéphanie" },
     { name: "Henrique" },
   ];
+
+  const { data: projeto } = useGetProjeto({
+    onError: (err) => {
+      console.log(err);
+    },
+  });
+  console.log(projeto);
 
   const queryClient = useQueryClient();
   const { mutate: createProjeto } = useCreateProjeto({
@@ -63,19 +70,17 @@ function Projeto() {
             placeholder="Nome"
             {...register("nome")}
           />
-          {errors.name && <p>{errors.name.message}</p>}
+          {errors.nome && <p>{errors.nome.message}</p>}
 
-          <Descriçao>
-            <label htmlFor="descrição">Descrição:</label>
-            <InputMaior
-              type="text"
-              name="descricao"
-              id="descricao"
-              placeholder="Descrição"
-              {...register("descricao")}
-            />
-            {errors.descricao && <p>{errors.descricao.message}</p>}
-          </Descriçao>
+          <label htmlFor="descrição">Descrição:</label>
+          <InputMaior
+            type="text"
+            name="descricao"
+            id="descricao"
+            placeholder="Descrição"
+            {...register("descricao")}
+          />
+          {errors.descricao && <p>{errors.descricao.message}</p>}
 
           <Sbutton
             type="submit"

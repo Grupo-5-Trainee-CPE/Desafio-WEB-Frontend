@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const ProjetoSchema = z.object({
+export const validador = z.object({
   nome: z
     .string({ required_error: "O nome é obrigatório" })
     .min(2, { message: "No mínimo 2 caracteres" })
