@@ -1,13 +1,13 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { checkLogin } from "../../Services/api/endpoints";
 
-export function usecheckLogin({
-  onSucess = () => {},
+export function useCheckLogin({
+  onSuccess = () => {},
   onError = (err) => console.log(err),
 } = {}) {
   return useMutation({
     mutationFn: checkLogin,
-    onSucess,
+    onSuccess,
     onError,
   });
 }

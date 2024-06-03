@@ -1,11 +1,30 @@
 import { Link, useNavigate } from "react-router-dom";
-import { DivFaixa, Frase, DivInput, DivLogin, Input, Button, Label, Form, Título } from "./Styles.js";
+import {
+  DivFaixa,
+  Frase,
+  DivInput,
+  DivLogin,
+  Input,
+  Button,
+  Label,
+  Form,
+  Título,
+} from "./Styles.js";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { loginUser } from './utils';
+import { loginUser } from "./utils";
+import { useCheckLogin } from "../../Hooks/query/login.js";
 
 function Login() {
   const navigate = useNavigate();
+  const { mutate: checkLogin } = useCheckLogin({
+    onSuccess: () => {
+      navigate("/");
+    },
+    onError: (err) => {
+      console.log(err);
+    },
+  });
 
   const {
     handleSubmit,
@@ -17,11 +36,9 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      const result = await loginUser(data);
-      console.log(result);
-      navigate("/Home");
+      checkLogin(data);
     } catch (error) {
-      console.error('Erro ao fazer login:', error);
+      console.error("Erro ao fazer login:", error);
     }
   };
 

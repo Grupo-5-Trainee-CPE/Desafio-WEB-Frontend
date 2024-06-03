@@ -1,3 +1,4 @@
+import useAuthStore from "../../../Stores/auth";
 import api from "./api";
 
 export async function createUsuarios(newUser) {
@@ -6,6 +7,10 @@ export async function createUsuarios(newUser) {
 }
 
 export async function checkLogin(login) {
+  const { setAuth } = useAuthStore.getState();
+
   const { data } = await api.post(`/login`, login);
+  setAuth(data.token);
+
   return data;
 }
