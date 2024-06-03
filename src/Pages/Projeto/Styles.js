@@ -185,3 +185,15 @@ export const Table = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+//export const Form = styled.form``;
+//export const Campo = styled.div``;
+//export const Label = styled.label``;
+//export const Escrita = styled.input``;
+//export const Botão = styled.button``;
+/*export const Caixão = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;*/
