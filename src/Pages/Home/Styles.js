@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
 import { Table } from "antd";
 
+export const Container = styled.div``;
 
 export const CarouselStyled = styled(Carousel)`
   width: 480px;
