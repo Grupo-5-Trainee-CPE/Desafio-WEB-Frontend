@@ -16,13 +16,16 @@
     "@tanstack/react-query-devtools": "^5.36.2",
     "antd": "^5.17.0",
     "axios": "^1.6.8",
+    "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.4",
     "react-icons": "^5.2.1",
+    "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.23.1",
     "styled-components": "^6.1.11",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.66",
