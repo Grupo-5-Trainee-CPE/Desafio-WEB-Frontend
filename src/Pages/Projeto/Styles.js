@@ -56,7 +56,6 @@ export const Caixa = styled.div`
 `;
 
 export const Forms = styled.form`
-  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
@@ -76,7 +75,8 @@ export const Input = styled.input`
   height: 65px;
   color: black;
   font-size: 26px;
-  margin-left: 50px;
+  margin-left: 80px;
+  margin-bottom: 20px;
   justify-content: center;
   align-items: center;
   cursor: pointer;

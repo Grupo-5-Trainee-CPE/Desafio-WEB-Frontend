@@ -92,9 +92,9 @@ function Projeto() {
       </Caixa>
       <SubTitulo>GERENCIAR PROJETOS</SubTitulo>
       <Table>
-        {projetos.map((projeto, index) => (
+        {projeto?.map((projeto, index) => (
           <Linha key={index}>
-            <span> {projeto.name} </span>
+            <span> {projeto.nome} </span>
             <ProjetoButtons>
               <FaEdit />
               <FaTrash />
