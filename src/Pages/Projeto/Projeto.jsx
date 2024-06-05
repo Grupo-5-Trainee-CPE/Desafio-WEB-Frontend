@@ -12,26 +12,40 @@ import {
   Table,
 } from "./Styles";
 import { FaTrash, FaEdit } from "react-icons/fa";
-
 import { Form, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validador } from "./utils";
 import { useCreateProjeto, useGetProjeto } from "../../Hooks/query/projetos";
 import { useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import { ModalDelete } from "../../Componentes";
 
 function Projeto() {
-  const projetos = [
-    { name: "Ana" },
-    { name: "Stéphanie" },
-    { name: "Henrique" },
-  ];
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [projetoToDelete, setProjetoToDelete] = useState("");
+
+  const openModal = (projeto) => {
+    setProjetoToDelete(projeto);
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setProjetoToDelete(null);
+  };
+
+  const handleDelete = () => {
+    if (projetoToDelete) {
+      deleteProjeto(projetoToDelete._id);
+      closeModal();
+    }
+  };
 
   const { data: projeto } = useGetProjeto({
     onError: (err) => {
       console.log(err);
     },
   });
-  console.log(projeto);
 
   const queryClient = useQueryClient();
   const { mutate: createProjeto } = useCreateProjeto({
@@ -91,13 +105,16 @@ function Projeto() {
         </Forms>
       </Caixa>
       <SubTitulo>GERENCIAR PROJETOS</SubTitulo>
+      {modalIsOpen && (
+        <ModalDelete closeModal={closeModal} projetoexcluir={projetoToDelete} />
+      )}
       <Table>
         {projeto?.map((projeto, index) => (
           <Linha key={index}>
             <span> {projeto.nome} </span>
             <ProjetoButtons>
               <FaEdit />
-              <FaTrash />
+              <FaTrash onClick={() => openModal(projeto?._id)} />
             </ProjetoButtons>
           </Linha>
         ))}

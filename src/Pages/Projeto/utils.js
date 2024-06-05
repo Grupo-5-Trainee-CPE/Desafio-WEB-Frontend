@@ -8,6 +8,6 @@ export const validador = z.object({
 
   descricao: z
     .string({ required_error: "A descrição é obrigatória" })
-    .min(10, { message: "A descrição deve ter pelo menos 10 caracteres" })
+    .min(5, { message: "A descrição deve ter pelo menos 10 caracteres" })
     .max(120, { message: "No máximo 50 caracteres" }),
 });
