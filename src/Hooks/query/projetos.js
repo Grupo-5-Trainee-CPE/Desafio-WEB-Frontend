@@ -1,5 +1,9 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { createProjeto, readProjeto } from "../../Services/api/endpoints";
+import {
+  createProjeto,
+  deleteProjeto,
+  readProjeto,
+} from "../../Services/api/endpoints";
 
 export function useCreateProjeto({
   onSucess = () => {},
@@ -19,6 +23,17 @@ export function useGetProjeto({
   return useQuery({
     queryKey: ["projeto"],
     queryFn: readProjeto,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useDeleteProjeto({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: deleteProjeto,
     onSuccess,
     onError,
   });
