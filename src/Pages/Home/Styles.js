@@ -1,6 +1,23 @@
 import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
 import { Table } from "antd";
+import backgroundImage from "../../Images/LogoCPE.png";
+
+export const HeaderHome = styled.div`
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  display: flex;
+  align-items: center;
+  padding: 35px;
+  background-color: #fadb14;
+  background-image: url(${backgroundImage});
+  background-size: 120px;
+  background-repeat: no-repeat;
+  background-position: left;
+  min-width: 480px;
+`;
 
 export const Container = styled.div``;
 
@@ -8,7 +25,7 @@ export const CarouselStyled = styled(Carousel)`
   width: 480px;
   height: 80px;
   margin: auto;
-  margin-top: 50px;
+  margin-top: 120px;
 `;
 
 export const TableSessoes = styled(Table)`
@@ -39,4 +56,4 @@ export const TableSessoes = styled(Table)`
     height: 50px;
     font-size: 15px;
   }
-`
+`;

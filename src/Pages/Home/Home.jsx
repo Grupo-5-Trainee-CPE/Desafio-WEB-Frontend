@@ -1,5 +1,5 @@
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { CarouselStyled, TableSessoes } from "./Styles";
+import { CarouselStyled, TableSessoes, HeaderHome } from "./Styles";
 import { Tag } from 'antd';
 import { useEffect, useState } from "react";
 import api from '../../Services/api/api';
@@ -67,7 +67,7 @@ function Home()
 
   return (
     <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-      HOME
+      <HeaderHome/>
       <CarouselStyled showThumbs={false} infiniteLoop={true}>
         <Container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
           <img src="./src/Images/CPE-Home.png"/>
