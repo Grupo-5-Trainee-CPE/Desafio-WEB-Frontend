@@ -1,26 +1,21 @@
-import { jwtDecode } from "jwt-decode";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import {jwtDecode } from "jwt-decode";
 
 const useAuthStore = create(
   persist(
-    (set, get) => ({
-      auth: null,
-      setAuth: (accessToken) => {
-        const { user } = jwtDecode(accessToken);
-        set({ auth: { accessToken, user } });
+    (set) => ({
+      token: null,
+      usuario: null,
+      setToken: (token) => {
+        const { usuario } = jwtDecode(token);
+        set({ token, usuario });
       },
-      getToken: () => {
-        return get().auth?.accessToken;
-      },
-      setUser: (user) =>
-        set((state) => ({
-          auth: { ...state?.auth, user },
-        })),
-      clearAuth: () => set({ auth: null }),
+      setUsuario: (usuario) => set({ usuario }),
+      clearAuth: () => set({ token: null, usuario: null }),
     }),
     {
-      name: "AuthData",
+      name: "auth", // name of them item in the storage (must be unique)
     }
   )
 );

@@ -4,10 +4,12 @@ import { Tag } from 'antd';
 import { useEffect, useState } from "react";
 import api from '../../Services/api/api';
 import { Container } from "./Styles";
+import useAuthStore from "../../../Stores/auth";
 
 function Home() 
 {
-  const [usuarios, setUsuarios] = useState([]);
+  const usuario = useAuthStore((state) => state.usuario);
+  const [sessoes, setSessoes] = useState([]);
   const [carregando, setCarregando] = useState(false);
 
   const columns = [
@@ -34,35 +36,27 @@ function Home()
       render: time => <Tag style={{ borderColor: '#fadb14', color: '#fadb14', background: 'transparent' }}>{time}</Tag>,
     },
   ];
-  
-  const data = [];
-  
-  for (let i = 0; i < 100; i++) {
-    data.push({
-      key: i,
-      nome: `${usuarios.map((usuario) => (usuario.nome))}`,
-      projeto: `Projeto ${i}`,
-      cargo: `${usuarios.map((usuario) => (usuario.cargo))}`,
-      inicio: `London, Park Lane no. ${i}`,
-      time: `${i}`,
-    });
-  }
 
-  const getUsuarios = async () => {
+  const getSessoes = async () => {
     try {
-      setCarregando(true);
-      const res = await api.get("/usuarios");
-      setUsuarios(res.data);
+      const res = await api.get("/sessoes");
+      setSessoes(res.data);
     } catch (erro) {
       console.error(erro);
       alert(erro.response.data.message);
-    } finally { 
-      setCarregando(false);
     }
   };
-  
-  useEffect(() => { getUsuarios() }, [])
-  
+
+  getSessoes();
+
+  useEffect(() => {
+    const apiInterval = setInterval(() => {
+      getSessoes();
+    }, 6000); // Faz a chamada à API a cada minuto
+
+    return () => clearInterval(apiInterval); // Limpa o intervalo quando o componente for desmontado
+  }, []);
+
   if(carregando) {
     return (
       <Container>
@@ -89,12 +83,11 @@ function Home()
         </Container>
       </CarouselStyled>
       <TableSessoes
-          dataSource={data}
-          columns={columns}
-          scroll={{ y: 180}}
-          pagination={false}
-        />
-      {usuarios.map((usuario) => (<h1>{usuario.nome}</h1>))}
+        dataSource={sessoes}
+        columns={columns}
+        scroll={{ y: 180}}
+        pagination={false}
+      />
     </Container>
   );
 }

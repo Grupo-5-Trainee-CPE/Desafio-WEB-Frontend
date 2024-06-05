@@ -1,3 +1,4 @@
+import staticMethods from "antd/es/message";
 import useAuthStore from "../../../Stores/auth";
 import api from "./api";
 
@@ -7,10 +8,11 @@ export async function createUsuarios(newUser) {
 }
 
 export async function checkLogin(login) {
-  const { setAuth } = useAuthStore.getState();
+  const {setToken} = useAuthStore.getState();
 
   const { data } = await api.post(`/login`, login);
-  setAuth(data.token);
+  console.log('data', data);
+  setToken(data.token);
 
   return data;
 }
