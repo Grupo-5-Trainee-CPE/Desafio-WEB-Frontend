@@ -20,6 +20,7 @@ function ModalDelete({ closeModal, projetoexcluir }) {
   const handleDelete = () => {
     deleteProjeto(projetoexcluir);
     closeModal();
+    window.location.reload();
   };
 
   return (

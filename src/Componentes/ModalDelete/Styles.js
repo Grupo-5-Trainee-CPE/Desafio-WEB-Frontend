@@ -2,23 +2,23 @@ import styled from "styled-components";
 import { CloseOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
 
-export const Caixa = styled.div`
-  width: 588px;
-  height: 358px;
-  top: -185px;
-  left: 7615px;
-  gap: 0px;
-  border-radius: 40px;
-  opacity: 0px;
-  background-color: white;
-  align-items: center;
-  margin: auto;
-  margin-bottom: 40px;
+// export const Caixa = styled.div`
+//   width: 588px;
+//   height: 358px;
+//   top: -185px;
+//   left: 7615px;
+//   gap: 0px;
+//   border-radius: 40px;
+//   opacity: 0px;
+//   background-color: white;
+//   align-items: center;
+//   margin: auto;
+//   margin-bottom: 40px;
 
-  @media (max-width: 600px) {
-    justify-content: space-between;
-  }
-`;
+//   @media (max-width: 600px) {
+//     justify-content: space-between;
+//   }
+// `;
 
 export const Titulo = styled.div`
   text-align: center;

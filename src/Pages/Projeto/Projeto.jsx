@@ -6,23 +6,29 @@ import {
   Input,
   InputMaior,
   Forms,
-  Descriçao,
   ProjetoButtons,
   Linha,
   Table,
 } from "./Styles";
 import { FaTrash, FaEdit } from "react-icons/fa";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validador } from "./utils";
-import { useCreateProjeto, useGetProjeto } from "../../Hooks/query/projetos";
+import {
+  useCreateProjeto,
+  useGetProjeto,
+  useUpdateProjeto,
+} from "../../Hooks/query/projetos";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
-import { ModalDelete } from "../../Componentes";
+import { ModalDelete, ModalEdit } from "../../Componentes";
 
 function Projeto() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [projetoToDelete, setProjetoToDelete] = useState("");
+
+  const [modaleditIsOpen, setModalEditIsOpen] = useState(false);
+  const [projetoToEdit, setProjetoToEdit] = useState("");
 
   const openModal = (projeto) => {
     setProjetoToDelete(projeto);
@@ -34,11 +40,14 @@ function Projeto() {
     setProjetoToDelete(null);
   };
 
-  const handleDelete = () => {
-    if (projetoToDelete) {
-      deleteProjeto(projetoToDelete._id);
-      closeModal();
-    }
+  const openModalEdit = (projeto) => {
+    setProjetoToEdit(projeto);
+    setModalEditIsOpen(true);
+  };
+
+  const closeModalEdit = () => {
+    setModalEditIsOpen(false);
+    setProjetoToEdit(null);
   };
 
   const { data: projeto } = useGetProjeto({
@@ -51,7 +60,7 @@ function Projeto() {
   const { mutate: createProjeto } = useCreateProjeto({
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ["projetos"],
+        queryKey: ["projeto"],
       });
     },
     onError: (err) => {
@@ -62,6 +71,7 @@ function Projeto() {
   const onSubmit = (data) => {
     console.log(data);
     createProjeto(data);
+    window.location.reload();
   };
 
   const {
@@ -69,6 +79,20 @@ function Projeto() {
     register,
     formState: { errors = {} },
   } = useForm({ resolver: zodResolver(validador) });
+
+  const { mutate: updateProjeto } = useUpdateProjeto({
+    onSuccess: (data) => {
+      console.log("Projeto atualizado com sucesso:", data);
+    },
+    onError: (err) => {
+      console.error("Erro ao atualizar projeto:", err);
+    },
+  });
+
+  const handleUpdate = (data) => {
+    const { _id, ...projetoData } = data;
+    updateProjeto({ projetoId: _id, projetoData });
+  };
 
   return (
     <div>
@@ -85,7 +109,6 @@ function Projeto() {
             {...register("nome")}
           />
           {errors.nome && <p>{errors.nome.message}</p>}
-
           <label htmlFor="descrição">Descrição:</label>
           <InputMaior
             type="text"
@@ -108,12 +131,19 @@ function Projeto() {
       {modalIsOpen && (
         <ModalDelete closeModal={closeModal} projetoexcluir={projetoToDelete} />
       )}
+      {modaleditIsOpen && (
+        <ModalEdit
+          closeModalEdit={closeModalEdit}
+          projetoeditar={projetoToEdit}
+          onSubmit={handleUpdate}
+        />
+      )}
       <Table>
         {projeto?.map((projeto, index) => (
           <Linha key={index}>
             <span> {projeto.nome} </span>
             <ProjetoButtons>
-              <FaEdit />
+              <FaEdit onClick={() => openModalEdit(projeto?._id)} />
               <FaTrash onClick={() => openModal(projeto?._id)} />
             </ProjetoButtons>
           </Linha>

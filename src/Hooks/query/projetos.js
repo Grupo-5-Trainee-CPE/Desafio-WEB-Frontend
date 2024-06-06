@@ -3,6 +3,7 @@ import {
   createProjeto,
   deleteProjeto,
   readProjeto,
+  updateProjeto,
 } from "../../Services/api/endpoints";
 
 export function useCreateProjeto({
@@ -34,6 +35,17 @@ export function useDeleteProjeto({
 } = {}) {
   return useMutation({
     mutationFn: deleteProjeto,
+    onSuccess,
+    onError,
+  });
+}
+
+export function useUpdateProjeto({
+  onSuccess = () => {},
+  onError = (err) => console.log(err),
+} = {}) {
+  return useMutation({
+    mutationFn: updateProjeto,
     onSuccess,
     onError,
   });
