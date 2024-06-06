@@ -1,4 +1,21 @@
 import styled from "styled-components";
+import backgroundImage from "../../Images/LogoCPE.png";
+
+export const HeaderCadastro = styled.div`
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  display: flex;
+  align-items: center;
+  padding: 35px;
+  background-color: #fadb14;
+  background-image: url(${backgroundImage});
+  background-size: 120px;
+  background-repeat: no-repeat;
+  background-position: left;
+  min-width: 480px;
+`;
 
 export const Container = styled.div``;
 
@@ -8,12 +25,12 @@ export const Titulo = styled.h1`
   justify-content: center;
   align-items: center;
   padding: 30px;
-  margin-left: 20px;
+  margin-left: 20px;  
   padding-top: 70px;
   font-family: "Roboto", sans-serif;
   font-size: 40px;
   font-weight: normal;
-  color: yellow;
+  color: #fadb14;
   margin: 0 auto;
 
   @media (max-width: 1200px) {
@@ -36,19 +53,20 @@ export const Titulo = styled.h1`
 
 export const Botao = styled.button`
   display: flex;
-  background-color: yellow;
+  background-color: #fadb14;
   justify-content: center;
   align-items: center;
-  width: 150px;
+  width: 170px;
   height: 50px;
-  border-radius: 40px;
-  font-size: 17px;
+  border-radius: 20px;
+  border-color: #fadb14;
+  font-size: 20px;
   font-weight: bold;
   margin-top: 30px;
   position: absolute;
   bottom: 20px;
   left: 50%;
-  top: 350px;
+  top: 250px;
   transform: translate(-50%, -50%);
 
   @media (max-width: 1200px) {
@@ -67,22 +85,6 @@ export const Botao = styled.button`
   }
 `;
 
-/*export const DivInput = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  top: 300px;
-
-  @media (max-width: 1200px) {
-    position: absolute;
-    top: 50%;
-  }
-`; */
-
 export const Input = styled.input`
   width: 300px;
   height: 40px;
@@ -91,6 +93,7 @@ export const Input = styled.input`
   color: gray;
   font-size: 15px;
   font-weight: normal;
+  font-family: Roboto;
   padding: 10px;
   margin-top: 10px;
 

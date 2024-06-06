@@ -1,6 +1,6 @@
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateUsuarios } from "../../Hooks/query/usuarios";
-import { Titulo, Botao, Input, Container, Forms, Frase } from "./Styles";
+import { Titulo, Botao, Input, Container, Forms, Frase, HeaderCadastro } from "./Styles";
 import { useForm } from "react-hook-form";
 import { validador } from "./utils";
 import { useNavigate } from "react-router-dom";
@@ -33,9 +33,9 @@ function Cadastro() {
   } = useForm({ resolver: zodResolver(validador) });
 
   return (
-    <Container>
+    <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <HeaderCadastro/>
       <Titulo>CADASTRO</Titulo>
-
       <Forms onSubmit={handleSubmit(onSubmit)}>
         <Input
           id="nome"
