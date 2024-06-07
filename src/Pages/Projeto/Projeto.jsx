@@ -14,11 +14,7 @@ import { FaTrash, FaEdit } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validador } from "./utils";
-import {
-  useCreateProjeto,
-  useGetProjeto,
-  useUpdateProjeto,
-} from "../../Hooks/query/projetos";
+import { useCreateProjeto, useGetProjeto } from "../../Hooks/query/projetos";
 import { useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { ModalDelete, ModalEdit } from "../../Componentes";
@@ -80,18 +76,10 @@ function Projeto() {
     formState: { errors = {} },
   } = useForm({ resolver: zodResolver(validador) });
 
-  const { mutate: updateProjeto } = useUpdateProjeto({
-    onSuccess: (data) => {
-      console.log("Projeto atualizado com sucesso:", data);
-    },
-    onError: (err) => {
-      console.error("Erro ao atualizar projeto:", err);
-    },
-  });
-
   const handleUpdate = (data) => {
     const { _id, ...projetoData } = data;
-    updateProjeto({ projetoId: _id, projetoData });
+    console.log();
+    updateProjeto({ projetoId: _id, body: projetoData });
   };
 
   return (

@@ -11,24 +11,34 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { validador } from "../../Pages/Projeto/utils";
 import { CloseOutlined } from "@ant-design/icons";
+import { useUpdateProjeto } from "../../Hooks/query/projetos";
 
-function ModalEdit({ projetoeditar, closeModal }) {
+function ModalEdit({ projetoeditar, closeModalEdit }) {
   const {
     handleSubmit,
     register,
     formState: { errors = {} },
   } = useForm({ resolver: zodResolver(validador) });
 
+  const { mutate: updateProjeto } = useUpdateProjeto({
+    onSuccess: (data) => {
+      console.log("Projeto atualizado com sucesso:", data);
+    },
+    onError: (err) => {
+      console.error("Erro ao atualizar projeto:", err);
+    },
+  });
+
   const onSubmit = (data) => {
-    console.log(data);
-    createProjeto(data);
-    window.location.reload();
+    updateProjeto({ _id: projetoeditar, body: data });
+    closeModalEdit;
+    window.location.reload;
   };
 
   return (
     <div>
       <Caixa>
-        <Fechar onClick={closeModal}>
+        <Fechar onClick={closeModalEdit}>
           <CloseOutlined />
         </Fechar>
         <Titulo>Editar informações</Titulo>
@@ -53,12 +63,7 @@ function ModalEdit({ projetoeditar, closeModal }) {
           />
           {errors.descricao && <p>{errors.descricao.message}</p>}
 
-          <Sbutton
-            type="submit"
-            onClick={() => alert("Seu projeto foi salvo com sucesso!")}
-          >
-            SALVAR
-          </Sbutton>
+          <Sbutton type="submit">SALVAR</Sbutton>
         </Forms>
       </Caixa>
     </div>
