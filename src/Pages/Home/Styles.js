@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
-import { Table } from "antd";
+import { Table, Button } from "antd";
 
 export const Container = styled.div``;
 
@@ -9,6 +9,21 @@ export const CarouselStyled = styled(Carousel)`
   height: 80px;
   margin: auto;
   margin-top: 50px;
+`;
+
+export const BotaoLogin = styled(Button)`
+  background-color: yellow !important;
+  color: black !important;
+  font-size: 35px !important;
+  border: none;
+  width: auto;
+  height: auto;
+
+  &:hover,
+  &:focus {
+    background-color: yellow !important;
+    color: black !important;
+  }
 `;
 
 export const TableSessoes = styled(Table)`
