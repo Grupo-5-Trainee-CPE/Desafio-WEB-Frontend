@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import {
-  DivFaixa,
+  HeaderLogin,
+  Container,
   Frase,
   DivInput,
   DivLogin,
@@ -43,14 +44,13 @@ function Login() {
   };
 
   return (
-    <div>
-      <DivFaixa>Imagem</DivFaixa>
-
-      <DivLogin>
+    <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+      <HeaderLogin/>
+      <DivLogin> 
         <Título> LOGIN </Título>
         <DivInput>
           <Form onSubmit={handleSubmit(onSubmit)}>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email"></Label>
             <Input
               type="email"
               name="email"
@@ -60,7 +60,7 @@ function Login() {
             />
             {errors.email && <p>{errors.email.message}</p>}
 
-            <Label htmlFor="senha">Senha</Label>
+            <Label htmlFor="senha"></Label>
             <Input
               type="password"
               name="senha"
@@ -80,7 +80,7 @@ function Login() {
           </Form>
         </DivInput>
       </DivLogin>
-    </div>
+    </Container>
   );
 }
 

@@ -1,15 +1,27 @@
 import styled from "styled-components";
+import backgroundImage from "../../Images/LogoCPE.png";
+
 export const Container = styled.div``;
 
-export const DivFaixa = styled.div`
-  width: 100%;
-  height: 130px;
-  background-color: #ffe712;
+export const HeaderLogin = styled.div`
+  position: absolute;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  display: flex;
+  align-items: center;
+  padding: 35px;
+  background-color: #fadb14;
+  background-image: url(${backgroundImage});
+  background-size: 120px;
+  background-repeat: no-repeat;
+  background-position: left;
+  min-width: 480px;
 `;
 
 export const DivLogin = styled.div`
   font-family: "Roboto", sans-serif;
-  color: #ffe712;
+  color: #fadb14;
   font-size: 3rem;
   width: 100%;
   height: 600px;
@@ -17,11 +29,12 @@ export const DivLogin = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 150px;
 `;
+
 export const DivInput = styled.div`
   display: flex;
-  padding: 3rem;
+  padding: 1rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -29,6 +42,7 @@ export const DivInput = styled.div`
   width: 100%;
   gap: 30px;
 `;
+
 export const Frase = styled.p`
   color: white;
   font-family: Roboto;
@@ -46,6 +60,7 @@ export const Título = styled.h3`
   line-height: 50px;
   text-align: left;
 `;
+
 export const Button = styled.button`
   display: inline-block;
   font-size: 28px;
@@ -53,7 +68,7 @@ export const Button = styled.button`
   line-height: 38px;
   border: none;
   cursor: pointer;
-  background: #ffe712; /* Cor de fundo */
+  background: #fadb14; /* Cor de fundo */
   color: black; /* Cor do texto */
   transition: background-color 0.3s ease; /* Transição suave */
   width: 200px;
@@ -62,13 +77,14 @@ export const Button = styled.button`
 
   /* Estilo do hover */
   &:hover {
-    background-color: #ffe712; /* Altera a cor de fundo no hover */
+    background-color: #fadb14; /* Altera a cor de fundo no hover */
   }
 `;
+
 export const Form = styled.form`
   font-family: "Roboto", sans-serif;
   gap: 20px;
-  color: #ffe712;
+  color: #fadb14;
   font-size: 3rem;
   width: 100%;
   background-color: black;
@@ -77,6 +93,7 @@ export const Form = styled.form`
   align-items: center;
   margin-top: 50px;
 `;
+
 export const Label = styled.label``;
 
 export const Input = styled.input`
