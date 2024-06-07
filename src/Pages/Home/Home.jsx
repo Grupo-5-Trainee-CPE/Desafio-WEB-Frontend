@@ -64,19 +64,6 @@ function Home() {
     },
   ];
 
-  const data = [];
-
-  for (let i = 0; i < 100; i++) {
-    data.push({
-      key: i,
-      nome: `${usuarios.map((usuario) => usuario.nome)}`,
-      projeto: `Projeto ${i}`,
-      cargo: `${usuarios.map((usuario) => usuario.cargo)}`,
-      inicio: `London, Park Lane no. ${i}`,
-      time: `${i}`,
-    });
-  }
-
   const getSessoes = async () => {
     try {
       const res = await api.get("/sessoes");
@@ -168,7 +155,7 @@ function Home() {
         </Container>
       </CarouselStyled>
       <TableSessoes
-        dataSource={data}
+        dataSource={sessoes}
         columns={columns}
         scroll={{ y: 180 }}
         pagination={false}
