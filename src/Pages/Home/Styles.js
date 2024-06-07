@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { Carousel } from "react-responsive-carousel";
-import { Table } from "antd";
 import backgroundImage from "../../Images/LogoCPE.png";
+import { Table, Button } from "antd";
 
 export const HeaderHome = styled.div`
   position: absolute;
-  top: 0; 
+  top: 0;
   left: 0;
-  width: 100%; 
+  width: 100%;
   display: flex;
   align-items: center;
   padding: 35px;
@@ -28,6 +28,36 @@ export const CarouselStyled = styled(Carousel)`
   margin-top: 120px;
 `;
 
+export const BotaoLogin = styled(Button)`
+  background-color: yellow !important;
+  color: black !important;
+  font-size: 35px !important;
+  border: none;
+  width: auto;
+  height: auto;
+
+  &:hover,
+  &:focus {
+    background-color: yellow !important;
+    color: black !important;
+  }
+`;
+
+export const BotaoLogin = styled(Button)`
+  background-color: yellow !important;
+  color: black !important;
+  font-size: 35px !important;
+  border: none;
+  width: auto;
+  height: auto;
+
+  &:hover,
+  &:focus {
+    background-color: yellow !important;
+    color: black !important;
+  }
+`;
+
 export const TableSessoes = styled(Table)`
   width: 800px;
   margin: auto;
@@ -44,13 +74,13 @@ export const TableSessoes = styled(Table)`
     font-weight: 650;
     text-align: center;
   }
-  .ant-table-cell>td{
-    border: 'black' !important;
+  .ant-table-cell > td {
+    border: "black" !important;
   }
-  .ant-table-tbody>tr>td {
+  .ant-table-tbody > tr > td {
     color: #ffffff;
     background-color: #434343;
-    border: none; 
+    border: none;
   }
   .ant-table-row {
     height: 50px;

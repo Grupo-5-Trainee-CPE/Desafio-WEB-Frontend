@@ -5,12 +5,19 @@ import { useEffect, useState } from "react";
 import api from '../../Services/api/api';
 import { Container } from "./Styles";
 import useAuthStore from "../../../Stores/auth";
+import { CarouselStyled, TableSessoes, Container, BotaoLogin } from "./Styles";
+import { Tag, Button } from 'antd';
+import { useEffect, useState } from "react";
+import api from "../../Services/api/api";
+import { ModalLogin } from "../../Componentes";
 
-function Home() 
-{
-  const usuario = useAuthStore((state) => state.usuario);
-  const [sessoes, setSessoes] = useState([]);
+
+  function Home() {
+    const [usuarios, setUsuarios] = useState([]);
+    const usuario = useAuthStore((state) => state.usuario);
+    const [sessoes, setSessoes] = useState([]);
   const [carregando, setCarregando] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const columns = [
     {
@@ -20,7 +27,7 @@ function Home()
         <div>
           <span style={{ fontWeight: 'bold' }}>{record.nome} </span>
           <span style={{ fontWeight: 'lighter' }}>{record.projeto}</span>
-          <p style={{ fontWeight: 'bold', color: '#fadb14'}}>{record.cargo}</p>
+          <p style={{ fontWeight: 'bold', color: '#fadb14' }}>{record.cargo}</p>
         </div>
       ),
     },
@@ -36,6 +43,19 @@ function Home()
       render: time => <Tag style={{ borderColor: '#fadb14', color: '#fadb14', background: 'transparent' }}>{time}</Tag>,
     },
   ];
+
+  const data = [];
+
+  for (let i = 0; i < 100; i++) {
+    data.push({
+      key: i,
+      nome: `${usuarios.map((usuario) => (usuario.nome))}`,
+      projeto: `Projeto ${i}`,
+      cargo: `${usuarios.map((usuario) => (usuario.cargo))}`,
+      inicio: `London, Park Lane no. ${i}`,
+      time: `${i}`,
+    });
+  }
 
   const getSessoes = async () => {
     try {
@@ -58,6 +78,22 @@ function Home()
   }, []);
 
   if(carregando) {
+    } finally {
+      setCarregando(false);
+    }
+  };
+
+  useEffect(() => { getUsuarios() }, []);
+
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+
+  if (carregando) {
     return (
       <Container>
         <h1>Carregando...</h1>
@@ -69,27 +105,32 @@ function Home()
     <Container style={{ display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <HeaderHome/>
       <CarouselStyled showThumbs={false} infiniteLoop={true}>
-        <Container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-          <img src="./src/Images/CPE-Home.png"/>
+        <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <img src="./src/Images/CPE-Home.png" alt="CPE Home" />
         </Container>
-        <Container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-          <img src="../src/Images/CPE-PSTrainee.png"/>
+        <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <img src="../src/Images/CPE-PSTrainee.png" alt="CPE PSTrainee" />
         </Container>
-        <Container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-          <img src="../src/Images/CPE-NossosServiços.png"/>
+        <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <img src="../src/Images/CPE-NossosServiços.png" alt="CPE Nossos Serviços" />
         </Container>
-        <Container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%'}}>
-          <img src="../src/Images/CPE-NossaHistoria.png"/>
+        <Container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+          <img src="../src/Images/CPE-NossaHistoria.png" alt="CPE Nossa História" />
         </Container>
       </CarouselStyled>
       <TableSessoes
-        dataSource={sessoes}
+        dataSource={data}
         columns={columns}
-        scroll={{ y: 180}}
+        scroll={{ y: 180 }}
         pagination={false}
       />
+      {usuarios.map((usuario) => (<h1 key={usuario.id}>{usuario.nome}</h1>))}
+      <BotaoLogin onClick={showModal}>
+        Fazer Login
+      </BotaoLogin>
+      <ModalLogin visible={isModalVisible} closeModal={handleCancel} />
     </Container>
   );
-}
+
 
 export default Home;
