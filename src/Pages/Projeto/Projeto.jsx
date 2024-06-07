@@ -65,7 +65,6 @@ function Projeto() {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     createProjeto(data);
     window.location.reload();
   };

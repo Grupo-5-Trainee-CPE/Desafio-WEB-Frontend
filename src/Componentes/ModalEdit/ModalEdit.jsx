@@ -21,8 +21,8 @@ function ModalEdit({ projetoeditar, closeModalEdit }) {
   } = useForm({ resolver: zodResolver(validador) });
 
   const { mutate: updateProjeto } = useUpdateProjeto({
-    onSuccess: (data) => {
-      console.log("Projeto atualizado com sucesso:", data);
+    onSuccess: () => {
+      return "Projeto atualizado com sucesso:";
     },
     onError: (err) => {
       console.error("Erro ao atualizar projeto:", err);

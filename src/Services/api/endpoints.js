@@ -9,10 +9,9 @@ export async function createUsuarios(newUser) {
 }
 
 export async function checkLogin(login) {
-  const {setToken} = useAuthStore.getState();
+  const { setToken } = useAuthStore.getState();
 
   const { data } = await api.post(`/login`, login);
-  console.log('data', data);
   setToken(data.token);
 
   return data;
@@ -25,7 +24,6 @@ export async function createProjeto(newProject) {
 
 export async function readProjeto() {
   const { data } = await api.get(`/projetos`);
-  console.log(data);
   return data;
 }
 
